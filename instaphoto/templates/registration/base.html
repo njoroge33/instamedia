@@ -15,12 +15,13 @@
     <div class="col-md-5">
 
       <div class="card" style="margin-top:7%;padding-left: 10%;border-radius:3%;">
-        
-        <div class="card-heading">
+
+        <div class="card-heading text-center">
+            <img src="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static 'images/logo.jpg' %}" class="img-fluid" style="height:30%;width:30%">
           {%if name%}
-          <h2 class="text-center">{{name}}</h2>
+          <strong><p class="text-secondary" style="font-size:17px;">{{name}} to see photos and videos from your friends.</p></strong>
           {%else%}
-          <h2 class="text-center">Login</h2>
+          <strong><p class="text-secondary" style="font-size:17px;">Login</p></strong>
           {%endif%}
         </div>
         {% if form.errors %}
@@ -40,8 +41,10 @@
           <div class="form-group" style="margin-top:5%;">
             {%if name%}
             <input type="submit" class="btn btn-primary btn-sm" value="{{name}}">
+            <p>Already have an account? <a href="{%url 'login_url'%}">Login</a></p>
             {%else%}
             <input type="submit" class="btn btn-primary btn-sm" value="Login">
+            <p>Don't have an account? <a href="{%url 'signup'%}">Sign Up</a></p>
             {%endif%}
           </div>
 
