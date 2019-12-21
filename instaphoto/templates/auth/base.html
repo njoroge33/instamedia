@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+
+{% block content %}
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Empty div -->
+      <div class="col-md-2">
+        
+      </div>
+      <div class="col-md-3" style="text-align: right;">
+        <img src="static/images/phon.jpg" class="img-fluid oya" style="margin-top:13%;height: 90%;">
+      </div>
+      <div class="col-md-5">
+        {% if form.errors %}
+        <p> Some Information Might be Incorrect </p>
+        {% endif %}
+        <div class="card" style="margin-top:7%;padding-left: 10%;border-radius:3%;">
+  
+          <div class="card-heading">
+            <h2 class="text-center">{{name}}</h2>
+          </div>
+  
+          <form class="card-body" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="fieldWrapper">
+              <p></p><strong>{{ field.label_tag }}</strong></p> {{ field }}
+              {% if field.help_text %}
+              <p class="help">{{ field.help_text|safe }}</p>
+              {% endif %}
+            </div>
+            {% endfor %}
+  
+            <div class="form-group" style="margin-top:5%;">
+              <input type="submit" class="btn btn-primary btn-sm" value="{{name}}">
+            </div>
+  
+            <input type="hidden" name="next" value="{{next}}">
+  
+          </form>
+  
+        </div>
+  
+      </div>
+      <!-- empty div -->
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+  
+  {% endblock %}
