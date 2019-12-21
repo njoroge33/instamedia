@@ -1,0 +1,60 @@
+{%extends 'base.html'%}
+{% load static%}
+
+{% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <!-- Empty div -->
+    <div class="col-md-2">
+
+    </div>
+    <div class="col-md-3" style="text-align: right;">
+      <img src="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static 'images/phon.jpg' %}" class="img-fluid image"
+        style="margin-top:13%;height: 90%;">
+    </div>
+    <div class="col-md-5">
+
+      <div class="card" style="margin-top:7%;padding-left: 10%;border-radius:3%;">
+        
+        <div class="card-heading">
+          {%if name%}
+          <h2 class="text-center">{{name}}</h2>
+          {%else%}
+          <h2 class="text-center">Login</h2>
+          {%endif%}
+        </div>
+        {% if form.errors %}
+        <p class="text-danger"> Some Information Might be Incorrect!!</p>
+        {% endif %}
+        <form class="card-body" method="post">
+          {% csrf_token %}
+          {% for field in form %}
+          <div class="fieldWrapper">
+            <p></p><strong>{{ field.label_tag }}</strong></p> {{ field }}
+            {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+            {% endif %}
+          </div>
+          {% endfor %}
+
+          <div class="form-group" style="margin-top:5%;">
+            {%if name%}
+            <input type="submit" class="btn btn-primary btn-sm" value="{{name}}">
+            {%else%}
+            <input type="submit" class="btn btn-primary btn-sm" value="Login">
+            {%endif%}
+          </div>
+
+          <input type="hidden" name="next" value="{{next}}">
+
+        </form>
+
+      </div>
+
+    </div>
+    <!-- empty div -->
+    <div class="col-md-1"></div>
+  </div>
+</div>
+
+{% endblock %}

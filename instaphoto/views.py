@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import SignUpForm
 
 def signup(request):
@@ -10,5 +10,5 @@ def signup(request):
         return redirect('home')
     else:
         form = SignUpForm()
-    return render(request, 'auth/signup.html', {'form': form, 'name':name})
+    return render(request, 'registration/signup.html', {'form': form, 'name':name})
 
