@@ -6,15 +6,16 @@
 <head>
   <meta charset="utf-8">
 
-  {% if title %}
-  <title>Gallery- {{title}}</title>
+  {% if name %}
+  <title>Insta- {{name}}</title>
   {% else %}
-    <title> My Gallery </title>
+    <title> Insta </title>
   {% endif %}
 
   {% block styles %}
     {% bootstrap_css %}
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <link rel="shortcut icon" type="image/jpg" href="{% static 'images/favicon.ico' %}"/>
   {% endblock %}
 
 </head>
