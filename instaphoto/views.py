@@ -40,6 +40,8 @@ def new_post(request):
             post = form.save(commit=False)
             post.user= current_user
             post.save()
+        return redirect('home')
     else:
         form = NewPostForm()
     return render(request, 'new_post.html', {'current_user':current_user, 'form':form})
+    

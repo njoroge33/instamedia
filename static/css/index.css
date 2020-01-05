@@ -13,11 +13,11 @@
     }
   }
 
-a{
+.navbar-header>a{
   color:black;
 }
 
-a:hover{
+.navbar-header>a:hover{
   color:black;
   text-decoration: none;
 }
