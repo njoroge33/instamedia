@@ -1,16 +1,31 @@
 {%extends 'base.html'%}
+{% load humanize %}
 
 {%block content%}
 {{block.super}}
 <div class="container">
     <div class="row">
+        <div class="col-sm-2"></div>
+
         <div class="col-sm-8">
-            <h2>efrg</h2>
+            {%for post in posts%}
+            <div class="card" style="margin-top:5%;margin-bottom:1%;">
+                <p class="card-header" style="font-weight:bold;">{{post.user.username}}</p>
+                <div class="card-body text-center">
+                    <img class="img-fluid" src="{{post.post_image.url}}" style="height: 400px; width: 500px;">
+                </div>
+
+                <div class="card-footer bg-white">
+                    <p><strong>{{post.user.username}}</strong> {{post.caption}}</p>
+                    <p style="font-size: 20px;color:gray;">{{post.pub_date | naturaltime}}</p>
+                </div>
+
+            </div>
+
+            {%endfor%}
         </div>
 
-        <div class="col-sm-3">
-            <h1>{{current_user.username}}</h1>
-        </div>
+        <div class="col-sm-2"></div>
     </div>
 </div>
 {%endblock%}

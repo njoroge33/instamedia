@@ -43,6 +43,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 INSTALLED_APPS = [
     'instaphoto',
     'bootstrap4',
+    'django.contrib.humanize',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -9,3 +9,8 @@ class Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,)
     pub_date = models.DateTimeField(auto_now_add=True)
     post_image = models.ImageField(upload_to = 'posts/')
+
+    @classmethod
+    def get_posts(cls):
+        posts = cls.objects.all()
+        return posts

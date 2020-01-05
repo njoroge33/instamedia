@@ -2,12 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, NewPostForm
 from django.core.mail import send_mail
+from .models import Post
 
 @login_required(login_url='/login/')
 def index(request):
     current_user = request.user
+    posts = Post.get_posts()
+    
    
-    return render(request, 'index.html', {'current_user':current_user})
+    return render(request, 'index.html', {'current_user':current_user, 'posts':posts})
 
 def signup(request):
     name = "Sign Up"
