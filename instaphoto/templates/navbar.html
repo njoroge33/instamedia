@@ -1,6 +1,18 @@
-<nav class="navbar navbar-dark bg-white fixed-top" style="box-shadow:1px 2px rgb(209, 208, 208);">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" ><h2>Insta</h2></a>
-        
+{% load static%}
+<nav class="navbar navbar-dark bg-white fixed-top" style="box-shadow:1px 2px rgb(209, 208, 208);height: 77px;">
+  <div class="container-fluid">
+    <div class="navbar-header container">
+      <a class="fab fa-instagram fa-3x" style="margin-top:1%;padding-right: 2%;"></a>
+      <img src="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static 'images/logo.jpg' %}" class="img-fluid"
+        style="height:50px;width:20%;margin-bottom:2%;border-left:2px solid;">
+      <input placeholder="Search" style="margin-left:2%;">
+      {% if user.is_authenticated %}
+      <a href="{%url 'logout_url'%}" class="btn btn-danger float-right"
+        style="margin-top:2%;margin-left: 1%;">logout</a>
+      <a class="fa fa-user fa-3x float-right" style="margin-top:1%"></a>
+      {% endif %}
+    </div>
+  </div>
+
+
 </nav>
