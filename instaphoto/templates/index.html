@@ -18,9 +18,10 @@
                 <div class="card-footer bg-white">
                     <p><strong>{{post.user.username}}</strong> {{post.caption}}</p>
                     <p style="font-size: 20px;color:gray;">{{post.pub_date | naturaltime}}</p>
+                    <strong>Comments:</strong>
                     {% for comment in comments %}
                     {%if post.id == comment.post.id%}
-                    <p>{{comment.comment}}</p>
+                    <p><strong>{{comment.user.username}}</strong> {{comment.comment | title}}</p>
                     {%endif%}
                     {% endfor %}
 
