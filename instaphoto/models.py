@@ -25,4 +25,9 @@ class Comment(models.Model):
     def get_comments(cls):
         comments = cls.objects.all()
         return comments
+
+class Profile(models.Model):
+    profile_photo = models.ImageField(upload_to = 'posts/')
+    user = models.ForeignKey(User, on_delete=models.CASCADE,)
+    bio = models.TextField(max_length=255)
     
