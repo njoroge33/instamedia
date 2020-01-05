@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm, NewPostForm, CommentForm
+from .forms import SignUpForm, NewPostForm, CommentForm, ProfileForm
 from django.core.mail import send_mail
 from .models import Post, Comment
 
@@ -59,4 +59,19 @@ def new_post(request):
     else:
         form = NewPostForm()
     return render(request, 'new_post.html', {'current_user':current_user, 'form':form})
+
+@login_required(login_url='/login/')
+def update_profile(request):
+    current_user = request.user
+   
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user= current_user
+            profile.save()
+        return redirect('home')
+    else:
+        form = ProfileForm()
+    return render(request, 'update_profile.html', {'current_user':current_user, 'form':form})
     

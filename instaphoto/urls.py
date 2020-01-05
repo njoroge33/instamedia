@@ -10,6 +10,7 @@ urlpatterns = [
     re_path(r'^login/', LoginView.as_view(), name='login_url'),
     re_path(r'^logout/', LogoutView.as_view(next_page='login_url'), name='logout_url'),
     re_path(r'^newpost/', views.new_post, name='new_post'),
+    re_path(r'^updateprofile/', views.update_profile, name='update_profile'),
 ]
 
 if settings.DEBUG:
