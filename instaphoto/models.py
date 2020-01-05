@@ -14,3 +14,15 @@ class Post(models.Model):
     def get_posts(cls):
         posts = cls.objects.all()
         return posts
+
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE,)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,)
+    comment = models.CharField(max_length=255)
+    pub_date = models.DateTimeField(auto_now_add=True)
+
+    @classmethod
+    def get_comments(cls):
+        comments = cls.objects.all()
+        return comments
+    

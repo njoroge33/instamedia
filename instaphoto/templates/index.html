@@ -18,6 +18,18 @@
                 <div class="card-footer bg-white">
                     <p><strong>{{post.user.username}}</strong> {{post.caption}}</p>
                     <p style="font-size: 20px;color:gray;">{{post.pub_date | naturaltime}}</p>
+                    {% for comment in comments %}
+                    {%if post.id == comment.post.id%}
+                    <p>{{comment.comment}}</p>
+                    {%endif%}
+                    {% endfor %}
+
+                    <form method="post" style="margin-top: 1.3em;">
+                        {{form.comment}}
+                        {% csrf_token %}
+                        <input type="hidden" value="{{post.id}}" name="post_id" />
+                        <button type="submit" class="btn btn-primary">Comment</button>
+                    </form>
                 </div>
 
             </div>

@@ -1,16 +1,28 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm, NewPostForm
+from .forms import SignUpForm, NewPostForm, CommentForm
 from django.core.mail import send_mail
-from .models import Post
+from .models import Post, Comment
 
 @login_required(login_url='/login/')
 def index(request):
     current_user = request.user
     posts = Post.get_posts()
+    comments = Comment.get_comments()
+    
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = current_user
+            comment.post = Post.objects.get(id=int(request.POST["post_id"]))
+            comment.save()
+            return redirect('home')
+    else:
+        form = CommentForm()
     
    
-    return render(request, 'index.html', {'current_user':current_user, 'posts':posts})
+    return render(request, 'index.html', {'current_user':current_user, 'posts':posts, 'form':form, 'comments':comments})
 
 def signup(request):
     name = "Sign Up"
