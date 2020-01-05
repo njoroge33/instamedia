@@ -1,7 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm
+from .forms import SignUpForm, NewPostForm
 from django.core.mail import send_mail
+
+@login_required(login_url='/login/')
+def index(request):
+    current_user = request.user
+   
+    return render(request, 'index.html', {'current_user':current_user})
 
 def signup(request):
     name = "Sign Up"
@@ -25,6 +31,15 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form, 'name':name})
 
 @login_required(login_url='/login/')
-def index(request):
+def new_post(request):
     current_user = request.user
-    return render(request, 'index.html', {'current_user':current_user})
+   
+    if request.method == 'POST':
+        form = NewPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.user= current_user
+            post.save()
+    else:
+        form = NewPostForm()
+    return render(request, 'new_post.html', {'current_user':current_user, 'form':form})
