@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm, NewPostForm, CommentForm, ProfileForm
 from django.core.mail import send_mail
-from .models import Post, Comment
+from .models import Post, Comment, Profile
 
 @login_required(login_url='/login/')
 def index(request):
@@ -74,4 +74,10 @@ def update_profile(request):
     else:
         form = ProfileForm()
     return render(request, 'update_profile.html', {'current_user':current_user, 'form':form})
-    
+
+def profile(request):
+    current_user = request.user
+
+    profiles = Profile.get_profiles()
+
+    return render(request, 'profile.html', {'current_user':current_user, 'profiles':profiles})

@@ -1,0 +1,33 @@
+{%extends 'base.html'%}
+
+{%block content%}
+{{block.super}}
+<div class="container text-center">
+    {%for profile in profiles%}
+    <div class="card bg-light" style="margin-top:5%;padding-top: 3%;padding-bottom: 3%;">
+            <div class="row">
+                    {%if profile.user.username == current_user.username%}
+                    <div class="col-sm-3">
+                        <img class="rounded-circle" src="{{profile.profile_photo.url}}" style="height:200px;width: 200px;"
+                            alt="No profile pic">
+                    </div>
+            
+                    <div class="col-sm-3">
+                        <strong style="font-size:25px;">{{current_user.username | title}}</strong>
+                        <a href='/updateprofile' class="btn btn-primary text-white">Edit profile</a>
+                        {%if profile.bio%}
+                        <p style="font-size:23px;"><strong>Bio:</strong> {{profile.bio}}</p>
+                        {%else%}
+                        <p>No bio!</p>
+                        {%endif%}
+                    </div>
+                    {%endif%}
+                </div>
+            
+    </div>
+    
+    {%endfor%}
+
+
+</div>
+{%endblock%}

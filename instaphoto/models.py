@@ -31,3 +31,7 @@ class Profile(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,)
     bio = models.TextField(max_length=255)
     
+    @classmethod
+    def get_profiles(cls):
+        profiles = cls.objects.all()
+        return profiles

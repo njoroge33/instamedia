@@ -10,7 +10,7 @@
       <a href="{%url 'logout_url'%}" class="btn btn-danger float-right"
         style="margin-top:2%;margin-left: 1%;">logout</a>
       <a href="{%url 'new_post'%}" class="btn btn-success float-right" style="margin-top:2%;margin-left: 1%;">post</a>
-      <a class="fa fa-user fa-3x float-right" style="margin-top:1%"><span style="font-size:19px;">{{current_user.username | title}}</span></a>
+      <a href="/profile" class="fa fa-user fa-3x float-right" style="margin-top:1%"><span style="font-size:19px;">{{current_user.username | title}}</span></a>
       {% endif %}
     </div>
   </div>
