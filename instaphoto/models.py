@@ -15,6 +15,12 @@ class Post(models.Model):
         posts = cls.objects.all()
         return posts
 
+    def save_post(self):
+        self.save()
+
+    def delete_post(self):
+        self.delete()
+
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE,)
     user = models.ForeignKey(User, on_delete=models.CASCADE,)
@@ -31,10 +37,17 @@ class Profile(models.Model):
     profile_photo = models.ImageField(upload_to = 'posts/')
     bio = models.TextField(max_length=255)
 
+    def save_profile(self):
+        self.save()
+
+    def delete_profile(self):
+        self.delete()
+
     def updateProfile(sender, **kwargs):
         if kwargs['created']:
             profile = Profile.objects.created(user=kwargs['instance'])
 
             post_save.connect(Profile, sender=User)
+            
             
     
