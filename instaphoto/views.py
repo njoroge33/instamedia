@@ -63,6 +63,7 @@ def new_post(request):
 @login_required(login_url='/login/')
 def update_profile(request):
     current_user = request.user
+    profile = Profile(user=request.user)
    
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES,  instance=request.user.profile)
@@ -85,3 +86,4 @@ def profile(request):
     comments = Comment.get_comments()
     
     return render(request, 'profile.html', {'current_user':current_user, 'posts':posts, 'comments':comments})
+    

@@ -10,7 +10,21 @@
       <a href="{%url 'logout_url'%}" class="btn btn-danger float-right"
         style="margin-top:2%;margin-left: 1%;">logout</a>
       <a href="{%url 'new_post'%}" class="btn btn-success float-right" style="margin-top:2%;margin-left: 1%;">post</a>
-      <a href="/profile" class="fa fa-user fa-3x float-right" style="margin-top:1%"><span style="font-size:19px;">{{current_user.username | title}}</span></a>
+
+      {%if user.profile.profile_photo%}
+      <div class="float-right pic">
+        <a href="/profile" ><img class="rounded-circle" src="{{user.profile.profile_photo.url}}"
+          style="height:70px;width: 70px;" alt="No profile pic">
+        <strong style="font-size:19px;">{{current_user.username | title}}</strong>
+        </a> 
+        
+      </div>
+      {%else%}
+
+      <a href="/profile" class="fa fa-user fa-3x float-right pic" style="margin-top:1%"><span
+          style="font-size:19px;">{{current_user.username | title}}</span></a>
+      {%endif%}
+
       {% endif %}
     </div>
   </div>

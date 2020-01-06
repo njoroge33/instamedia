@@ -10,7 +10,23 @@
         <div class="col-sm-8">
             {%for post in posts%}
             <div class="card" style="margin-top:5%;margin-bottom:1%;">
-                <p class="card-header" style="font-weight:bold;">{{post.user.username}}</p>
+                <div class="card-header">
+
+
+                    {%if post.user.profile.profile_photo%}
+                    <a><img class="rounded-circle" src="{{post.user.profile.profile_photo.url}}"
+                            style="height:70px;width: 70px;" alt="No profile pic">
+                        <strong style="font-size:19px;">{{post.user.username | title}}</strong>
+                    </a>
+
+                    {%else%}
+
+                    <a class="fa fa-user fa-3x" style="margin-top:1%"><span
+                            style="font-size:19px;">{{post.user.username | title}}</span></a>
+                    {%endif%}
+
+                </div>
+
                 <div class="card-body text-center">
                     <img class="img-fluid" src="{{post.post_image.url}}" style="height: 400px; width: 500px;"
                         type="button" class="btn btn-sm btn-outline-primary" id="post{{post.id}}"
@@ -47,8 +63,13 @@
 
     <div class="modal fade" id="extraModal{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
+        <button type="button" class="close text-danger" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+
             <div class="modal-content ">
+
 
                 <div class="modal-body row" style="padding:0;">
                     <img style="height: 500px;padding:0;margin: 0;" id="image" class=" col-12 col-md-7 text-center"
@@ -58,9 +79,9 @@
                         <div class="card-header bg-white">
                             <p><span>Posted by:
                                 </span><strong>{{post.user.username| title}}</strong></p>
-                                <p><span>Caption:
-                                    </span>{{post.caption}}</p>
-    
+                            <p><span>Caption:
+                                </span>{{post.caption}}</p>
+
                         </div>
 
                         <div class="card-body">
@@ -80,4 +101,5 @@
     </div>
     {%endfor%}
 </div>
+
 {%endblock%}
