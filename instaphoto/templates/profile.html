@@ -4,21 +4,24 @@
 {%block content%}
 {{block.super}}
 <div class="container text-center">
-    {%for profile in profiles%}
     <div class="card bg-light" style="margin-top:5%;padding-top: 3%;padding-bottom: 3%;">
         <div class="row">
-            {%if profile.user.username == current_user.username%}
+
             <div class="col-xs-12 col-sm-6 col-md-3">
-                <img class="rounded-circle" src="{{profile.profile_photo.url}}" style="height:200px;width: 200px;"
+                {%if user.profile.profile_photo%}
+                <img class="rounded-circle" src="{{user.profile.profile_photo.url}}" style="height:200px;width: 200px;"
                     alt="No profile pic">
+                {%else%}
+                <p>No profile picture!</p>
+                {%endif%}
             </div>
-            {%endif%}
+
 
             <div class="col-xs-6 col-sm-6 col-md-3">
                 <strong style="font-size:25px;">{{current_user.username | title}}</strong>
                 <a href='/updateprofile' class="btn btn-primary text-white">Edit profile</a>
-                {%if profile.user.username == current_user.username%}
-                <p style="font-size:23px;"><strong>Bio:</strong> {{profile.bio}}</p>
+                {%if user.profile.bio %}
+                <p style="font-size:23px;"><strong>Bio:</strong> {{user.profile.bio}}</p>
                 {%else%}
                 <p>No bio!</p>
                 {%endif%}
@@ -28,7 +31,6 @@
 
     </div>
 
-    {%endfor%}
 
     <div class="row">
 

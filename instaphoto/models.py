@@ -27,11 +27,13 @@ class Comment(models.Model):
         return comments
 
 class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE,)
     profile_photo = models.ImageField(upload_to = 'posts/')
-    user = models.ForeignKey(User, on_delete=models.CASCADE,)
     bio = models.TextField(max_length=255)
+
+    def updateProfile(sender, **kwargs):
+        if kwargs['created']:
+            user_profile = Profile.objects.created(user=kwargs['instance'])
+
+            post_save.connect(createProfile, sender=User)
     
-    @classmethod
-    def get_profiles(cls):
-        profiles = cls.objects.all()
-        return profiles
