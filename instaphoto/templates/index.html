@@ -12,7 +12,9 @@
             <div class="card" style="margin-top:5%;margin-bottom:1%;">
                 <p class="card-header" style="font-weight:bold;">{{post.user.username}}</p>
                 <div class="card-body text-center">
-                    <img class="img-fluid" src="{{post.post_image.url}}" style="height: 400px; width: 500px;">
+                    <img class="img-fluid" src="{{post.post_image.url}}" style="height: 400px; width: 500px;"
+                        type="button" class="btn btn-sm btn-outline-primary" id="post{{post.id}}"
+                        data-whatever="{{post.id}}" data-toggle="modal" data-target="#extraModal{{post.id}}">
                 </div>
 
                 <div class="card-footer bg-white">
@@ -40,5 +42,42 @@
 
         <div class="col-sm-2"></div>
     </div>
+
+    {% for post in posts %}
+
+    <div class="modal fade" id="extraModal{{post.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content ">
+
+                <div class="modal-body row" style="padding:0;">
+                    <img style="height: 500px;padding:0;margin: 0;" id="image" class=" col-12 col-md-7 text-center"
+                        src='{{post.post_image.url}}'>
+
+                    <div class=" col-12 col-md-5 card">
+                        <div class="card-header bg-white">
+                            <p><span>Posted by:
+                                </span><strong>{{post.user.username| title}}</strong></p>
+                                <p><span>Caption:
+                                    </span>{{post.caption}}</p>
+    
+                        </div>
+
+                        <div class="card-body">
+                            {% for comment in comments %}
+                            {%if post.id == comment.post.id%}
+                            <p><strong>{{comment.user.username}}</strong> {{comment.comment | title}} <span
+                                    style="font-size: 10px;color:gray;">{{comment.pub_date | naturaltime}}</span></p>
+                            {%endif%}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    {%endfor%}
 </div>
 {%endblock%}

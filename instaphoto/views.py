@@ -80,5 +80,6 @@ def profile(request):
 
     profiles = Profile.get_profiles()
     posts = Post.get_posts()
-
-    return render(request, 'profile.html', {'current_user':current_user, 'profiles':profiles, 'posts':posts})
+    comments = Comment.get_comments()
+    
+    return render(request, 'profile.html', {'current_user':current_user, 'profiles':profiles, 'posts':posts, 'comments':comments})
