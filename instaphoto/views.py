@@ -79,5 +79,6 @@ def profile(request):
     current_user = request.user
 
     profiles = Profile.get_profiles()
+    posts = Post.get_posts()
 
-    return render(request, 'profile.html', {'current_user':current_user, 'profiles':profiles})
+    return render(request, 'profile.html', {'current_user':current_user, 'profiles':profiles, 'posts':posts})
