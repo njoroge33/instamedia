@@ -49,6 +49,6 @@
 - Django
 
 ## License
-MIT &copy;2019 [John Gichuhi](https://github.com/njoroge33)
+MIT &copy;2020 [John Gichuhi](https://github.com/njoroge33/instamedia/blob/master/LICENSE)
 Instamedia
 
