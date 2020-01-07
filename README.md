@@ -2,10 +2,6 @@
 
  A clone of the website for the popular photo app Instagram .thats enable users to post images and also view others images
 
-# Gallery
-
-#### This is my personal gallery website where you can see photos that I have uploaded.
-
 ## As users you can :
 * Sign in to the application to start using.
 * Upload my pictures to the application.
