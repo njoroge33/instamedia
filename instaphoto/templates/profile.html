@@ -4,45 +4,65 @@
 {%block content%}
 {{block.super}}
 <div class="container text-center">
-    <div class="card bg-light" style="margin-top:5%;padding-top: 3%;padding-bottom: 3%;">
-        <div class="row">
-
-            <div class="col-xs-12 col-sm-6 col-md-3">
+    <div class="row mt-5 ">
+        <div class="col-3 card">
+            <div class="mt-3">
                 {%if user.profile.profile_photo%}
-                <img class="rounded-circle" src="{{user.profile.profile_photo.url}}" style="height:200px;width: 200px;"
+                <img class="rounded-circle" src="{{user.profile.profile_photo.url}}" style="height:100px;width: 100px;"
                     alt="No profile pic">
                 {%else%}
                 <p>No profile picture!</p>
                 {%endif%}
             </div>
-
-
-            <div class="col-xs-6 col-sm-6 col-md-3">
+            <div>
                 <strong style="font-size:25px;">{{current_user.username | title}}</strong>
-                <a href='/updateprofile' class="btn btn-primary text-white">Edit profile</a>
-                {%if user.profile.bio %}
-                <p style="font-size:23px;"><strong>Bio:</strong> {{user.profile.bio}}</p>
-                {%else%}
-                <p>No bio!</p>
-                {%endif%}
+                <p>{{current_user.email}}</p>
             </div>
+            <form action="{% url 'logout_url' %}" method="post" class="mb-2">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+            <hr class="my-0">
+
+            {%if user.profile.bio %}
+            <p class="fst-italic">{{user.profile.bio}}</p>
+            {%else%}
+            <p>No bio!</p>
+            {%endif%}
+
+            <hr class="my-0">
+            <div class="d-flex my-2">
+                <a href='/updateprofile' class="btn btn-warning text-white">Edit profile</a>
+
+            </div>
+            <!-- <hr class="my-0"> -->
+        </div>
+        <div class="col-1">
 
         </div>
+        <div class="card bg-light col-8">
+            <p>jjkj</p>
+            {%if posts%}
+            <div class="row p-2">
+                {% for post in posts %}
+                {%if post.user.username == current_user.username%}
+                <div class="col-xs-6 col-sm-6 col-md-4 card">
+                    <img src="{{post.post_image.url}}" class="img-responsive" alt="Image"
+                        style="height:150px;width:100%;" type="button" class="btn btn-sm btn-outline-primary"
+                        id="post{{post.id}}" data-whatever="{{post.id}}" data-toggle="modal"
+                        data-target="#extraModal{{post.id}}">
+                </div>
+                {%endif%}
+                {% endfor %}
 
-    </div>
+            </div>
+            {%else%}
+            <div class="row text-danger">
+                <p>No Post!</p>
+            </div>
+            {%endif%}
 
-
-    <div class="row">
-
-        {% for post in posts %}
-        {%if post.user.username == current_user.username%}
-        <div class="col-xs-6 col-sm-6 col-md-4 card" style="padding-top:1%;margin-top:1%;padding-bottom:1%;">
-            <img src="{{post.post_image.url}}" class="img-responsive" alt="Image" style="height:300px;width:100%;"
-                type="button" class="btn btn-sm btn-outline-primary" id="post{{post.id}}" data-whatever="{{post.id}}"
-                data-toggle="modal" data-target="#extraModal{{post.id}}">
         </div>
-        {%endif%}
-        {% endfor %}
     </div>
 
     {% for post in posts %}

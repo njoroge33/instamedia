@@ -1,6 +1,8 @@
 from django.db import models
 import datetime as dt
 from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 
 # Create your models here.
@@ -43,11 +45,17 @@ class Profile(models.Model):
     def delete_profile(self):
         self.delete()
 
-    def updateProfile(sender, **kwargs):
-        if kwargs['created']:
-            profile = Profile.objects.created(user=kwargs['instance'])
+    # def updateProfile(sender, **kwargs):
+    #     if kwargs['created']:
+    #         profile = Profile.objects.created(user=kwargs['instance'])
 
-            post_save.connect(Profile, sender=User)
+    #         post_save.connect(Profile, sender=User)
+
+@receiver(post_save, sender=User)
+def create_profile(sender, instance, created, **kwargs):
+    if created:
+        Profile.objects.create(user=instance)
+
             
             
     

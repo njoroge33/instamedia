@@ -5,27 +5,52 @@
 <div class="container-fluid">
   <div class="row">
     <!-- Empty div -->
-    <div class="col-md-2">
+    <div class="col-md-1">
 
     </div>
-    <div class="col-md-3" style="text-align: right;">
-      <img src="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static 'images/phon.jpg' %}" class="img-fluid image"
-        style="margin-top:13%;height: 90%;">
+    <div class="col-md-5 p-2 position-relative mt-5">
+      <div class="position-relative">
+        <img src="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static 'images/phone.jpg' %}"
+          class="img-fluid image shadow rounded-3 w-100" style="height: 100%;">
+
+        <div
+          class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center bg-info bg-opacity-25">
+          <div class="text-center text-warning p-3">
+            <div class="typing-container">
+              <h2 class="fw-bold type-anim-1">IF YOU LIKE IT.</h2>
+              <p class="lead fw-bold mt-3 type-anim-2">SHARE IT.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="col-md-5">
 
-      <div class="card" style="margin-top:7%;padding-left: 10%;border-radius:3%;">
+      <div class="card mb-5 rounded-3">
 
         <div class="card-heading text-center">
-            <img src="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static 'images/logo.jpg' %}" class="img-fluid" style="height:30%;width:30%">
+          <!-- <img src="{{request.scheme}}://{{request.META.HTTP_HOST}}{% static 'images/logo.png' %}" class="img-fluid"
+            style="height:30%;width:30%"> -->
+                  <div class="d-inline-flex mt-4" style="color: #2580c2;">
+        <i href="/home" class="fa fa-camera-retro fa-2x"  style="color: #2580c2;"></i>
+        <p class="mt-2 fw-bold">Instamedia</p>
+      </div>
           {%if name%}
-          <strong><p class="text-secondary" style="font-size:17px;">{{name}} to see photos and videos from your friends.</p></strong>
+          <strong>
+            <p class="text-secondary" style="font-size:17px;">{{name}} to see photos and videos from your friends.</p>
+          </strong>
           {%else%}
-          <strong><p class="text-secondary" style="font-size:17px;">Login</p></strong>
+          <strong>
+            <p class="text-secondary" style="font-size:17px;">Login to see photos and videos from your friends.</p>
+          </strong>
           {%endif%}
         </div>
         {% if form.errors %}
-        <p class="text-danger"> Some Information Might be Incorrect!!</p>
+        {% for field, errors in form.errors.items %}
+        {% for error in errors %}
+        <p class="text-danger text-center">{{ error }}</p>
+        {% endfor %}
+        {% endfor %}
         {% endif %}
         <form class="card-body" method="post">
           {% csrf_token %}

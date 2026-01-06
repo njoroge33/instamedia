@@ -3,11 +3,17 @@ from . import views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView, LogoutView
+from .forms import LoginForm
 
 urlpatterns = [
     path('', views.signup, name='signup'),
     re_path(r'^home/', views.index, name='home'),
-    re_path(r'^login/', LoginView.as_view(), name='login_url'),
+    # re_path(r'^login/', LoginView.as_view(), name='login_url'),
+        path('login/', LoginView.as_view(
+        template_name='registration/login.html',
+        form_class=LoginForm,
+        redirect_authenticated_user=True
+    ), name='login_url'),
     re_path(r'^logout/', LogoutView.as_view(next_page='login_url'), name='logout_url'),
     re_path(r'^newpost/', views.new_post, name='new_post'),
     re_path(r'^profile/', views.profile, name='profile'),
