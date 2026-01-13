@@ -1,0 +1,57 @@
+/* @media only screen and (max-width: 770px) {
+    .image, .pic {
+      display: none;
+    }
+
+    .card {
+        margin-right: 15%;
+        margin-left: 15%;
+    }
+  } */
+
+.navbar-header>a, .pic>a{
+  color:black;
+}
+
+.navbar-header>a:hover, .pic>a:hover{
+  color:black;
+  text-decoration: none;
+}
+
+.modal-content  {
+  -webkit-border-radius: 0px !important;
+  -moz-border-radius: 0px !important;
+  border-radius: 0px !important; 
+}
+.type-anim-1, .type-anim-2 {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.type-anim-1 {
+    animation: fadeInUp 0.8s ease-out 0.5s forwards;
+}
+
+.type-anim-2 {
+    animation: fadeInUp 0.8s ease-out 1.5s forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Optional: Add a typing cursor effect */
+.typing-container::after {
+    content: '|';
+    animation: blink 1s infinite;
+    color: #ffc107;
+    font-weight: bold;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
