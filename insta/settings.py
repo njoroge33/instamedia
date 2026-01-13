@@ -79,17 +79,17 @@ TEMPLATES = [
 
 # development
 # if config('MODE')=="dev":
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'postgres',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
         
-}
+# }
 # production
 # else:
 #     DATABASES = {
@@ -100,6 +100,14 @@ DATABASES = {
 
 #     db_from_env = dj_database_url.config(conn_max_age=500)
 #     DATABASES['default'].update(db_from_env)
+
+DATABASES = {
+    "default": dj_database_url.config(
+        default=os.environ.get("DATABASE_URL"),
+        conn_max_age=0,  # IMPORTANT for serverless
+        ssl_require=True,
+    )
+}
 
 ALLOWED_HOSTS = [
     '.vercel.app',
